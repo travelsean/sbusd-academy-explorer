@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Future Careers — SBUSD Academy Explorer</title>
+  <meta name="description" content="Discover 16 career academies at Santa Barbara Unified School District. Find out what each academy does, what jobs it leads to, and how it connects to your STEAM projects.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a3a5c;
+      --teal: #0f8a6e;
+      --teal-light: #e1f5ee;
+      --gold: #d4a017;
+      --bg: #f4f6f8;
+      --card: #ffffff;
+      --text: #1e2a38;
+      --text2: #4a5568;
+      --text3: #718096;
+      --border: #e2e8f0;
+      --accent-bg: #e6f0fb;
+      --accent: #1a5ea8;
+      --success-bg: #e6f4ec;
+      --success: #1e6e3b;
+      --pro-bg: #ede8fb;
+      --pro: #4a3080;
+      --radius: 10px;
+    }
+
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* NAV */
+    nav { background: var(--navy); padding: 0 24px; display: flex; align-items: center; gap: 16px; height: 56px; }
+    .nav-logo { color: white; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+    .nav-logo span { color: #7ec8e3; }
+    nav a { color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+    nav a:hover { color: white; border-bottom-color: #7ec8e3; }
+    .nav-right { margin-left: auto; display: flex; gap: 16px; align-items: center; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #1a3a5c 0%, #0f5c47 100%); padding: 52px 24px 44px; text-align: center; color: white; }
+    .hero h1 { font-size: clamp(24px, 5vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .hero h1 span { color: #7de8c8; }
+    .hero p { font-size: clamp(14px, 2.5vw, 17px); color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 24px; line-height: 1.65; }
+    .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 28px; font-weight: 700; color: #7de8c8; }
+    .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 48px; }
+
+    /* SEARCH & FILTERS */
+    .controls { margin-bottom: 24px; }
+    .search-wrap { position: relative; max-width: 360px; margin-bottom: 14px; }
+    .search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 16px; pointer-events: none; }
+    .search-wrap input { width: 100%; padding: 9px 12px 9px 38px; border: 1px solid var(--border); border-radius: 8px; background: white; font-size: 14px; color: var(--text); outline: none; }
+    .search-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,94,168,0.12); }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .fbtn { font-size: 12px; padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border); background: white; color: var(--text2); cursor: pointer; font-weight: 500; transition: all .15s; }
+    .fbtn:hover { border-color: var(--accent); color: var(--accent); }
+    .fbtn.on { background: var(--navy); color: white; border-color: var(--navy); }
+
+    /* GRID */
+    #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+    /* CARDS */
+    .pc { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: box-shadow .2s, border-color .2s; }
+    .pc:hover { border-color: #cbd5e0; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .pc.open { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(26,94,168,0.2); }
+    .ph { padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+    .pi { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 22px; }
+    .pn { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .ps { font-size: 11px; color: var(--text3); margin-top: 3px; }
+    .chv { color: var(--text3); font-size: 14px; flex-shrink: 0; margin-left: auto; transition: transform .2s; }
+    .chv.r { transform: rotate(180deg); }
+    .tg { font-size: 13px; color: var(--text2); padding: 0 16px 14px; margin-top: -4px; line-height: 1.5; }
+
+    .pb { padding: 0 16px 16px; border-top: 1px solid var(--border); }
+    .wh { font-size: 13px; color: var(--text); line-height: 1.7; margin: 14px 0 4px; }
+    .sl { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: .07em; text-transform: uppercase; margin: 14px 0 7px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
+    .pl { font-size: 11px; padding: 3px 10px; border-radius: 12px; line-height: 1.4; font-weight: 500; }
+    .jp { background: var(--accent-bg); color: var(--accent); }
+    .spl { background: var(--success-bg); color: var(--success); }
+    .cw-row { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 6px; font-size: 13px; color: var(--text2); line-height: 1.45; }
+    .cw-row i { font-size: 13px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+
+    .steam-box { background: var(--pro-bg); border-radius: 8px; padding: 12px 14px; margin-top: 14px; }
+    .steam-lbl { font-size: 10px; font-weight: 700; color: var(--pro); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 5px; }
+    .steam-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .steam-desc { font-size: 12px; color: var(--text2); margin-top: 5px; line-height: 1.5; }
+
+    .no-results { text-align: center; color: var(--text3); font-size: 15px; padding: 48px 16px; grid-column: 1/-1; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 24px; font-size: 12px; line-height: 1.8; }
+    footer a { color: #7ec8e3; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 500px) {
+      .hero { padding: 36px 16px 32px; }
+      .hero-stats { gap: 20px; }
+      #grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SBUSD <span>Academy Explorer</span></div>
+  <div class="nav-right">
+    <a href="https://www.sbunified.org/showcase/programs-by-school" target="_blank">All Programs</a>
+    <a href="https://www.sbunified.org/departments/educational-services/college-and-career" target="_blank">About CTE</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>What will you <span>create</span>?</h1>
+  <p>Explore the 16 career academies at Santa Barbara's high schools. Discover what students learn, what jobs they can get, and how it connects to what YOU are already doing in science and art.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">16</div><div class="lbl">Career academies</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="lbl">High schools</div></div>
+    <div class="hero-stat"><div class="num">3,000+</div><div class="lbl">Students enrolled</div></div>
+    <div class="hero-stat"><div class="num">8</div><div class="lbl">Industry fields</div></div>
+  </div>
+</div>
+
+<main>
+  <div class="controls">
+    <div class="search-wrap">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <input type="text" id="search" placeholder="Search by career, subject, or job..." oninput="rg()" aria-label="Search programs">
+    </div>
+    <div class="filters">
+      <button class="fbtn on" data-f="all" onclick="sf('all')">All 16</button>
+      <button class="fbtn" data-f="arts" onclick="sf('arts')">Arts & Media</button>
+      <button class="fbtn" data-f="tech" onclick="sf('tech')">Computer Science</button>
+      <button class="fbtn" data-f="health" onclick="sf('health')">Health & Medicine</button>
+      <button class="fbtn" data-f="build" onclick="sf('build')">Construction & Engineering</button>
+      <button class="fbtn" data-f="edu" onclick="sf('edu')">Education, Food & Business</button>
+    </div>
+  </div>
+
+  <div id="grid"></div>
+</main>
+
+<footer>
+  <p>Santa Barbara Unified School District &nbsp;|&nbsp; <a href="https://www.sbunified.org" target="_blank">sbunified.org</a> &nbsp;|&nbsp; CTE Coordinator: <a href="mailto:jvgarcia@sbunified.org">Julissa Garcia</a></p>
+  <p style="margin-top:6px">This site was created to connect SBUSD elementary STEAM programs with high school CTE academies. &nbsp;|&nbsp; Grades 4–6 project connections included.</p>
+</footer>
+
+<script>
+const D=[
+  {id:1,n:"Construction Tech",sc:["Dos Pueblos","San Marcos","Santa Barbara HS"],s:"build",ic:"ti-hammer",bg:"#FAEEDA",fg:"#633806",tg:"Design and build real structures from blueprint to finished building",wh:"Construction Tech students learn everything it takes to design and build real structures — from drafting blueprints and testing materials to managing project budgets. It's architecture, engineering, and math all in one, and students build actual scaled models using real construction techniques.",jo:["Architect","Civil Engineer","Carpenter","Electrician","Construction Manager","Interior Designer","Urban Planner","Building Inspector"],sc2:["Geometry and scale measurement","Physics of forces and loads","Materials science","Sustainable building design","Computer-Aided Design (CAD)"],cw:["Design and build scaled sustainable structures","Create professional blueprint drawings","Calculate real project budgets and costs","Study building codes and safety standards"],sp:"Blueprint City",spg:"4th grade",spd:"Draw a to-scale blueprint and build a cardboard model of a community building using real architectural symbols and color coding"},
+  {id:2,n:"Culinary Arts",sc:["Dos Pueblos","San Marcos","Santa Barbara HS"],s:"edu",ic:"ti-chef-hat",bg:"#FEF9E7",fg:"#633806",tg:"Cook, create, and discover the science behind every dish",wh:"Culinary Arts is about way more than cooking — it's food science! Students learn why bread rises, how heat transforms ingredients at the molecular level, and how to run a professional kitchen. At San Marcos, students run a real café called Café Royale.",jo:["Executive Chef","Restaurant Manager","Food Scientist","Nutritionist","Pastry Chef","Catering Director","Food Journalist","Hotel Manager"],sc2:["Physical and chemical changes in matter","Energy transfer and heat","Food microbiology and safety","Precise measurement and ratios","Flavor chemistry and taste science"],cw:["Run Café Royale — a real school café (San Marcos)","Learn the professional ProStart culinary curriculum","Train alongside professional chef mentors","Earn dual enrollment college credit at SBCC"],sp:"From Scratch: The Science of a Recipe",spg:"4th grade",spd:"Make butter by shaking cream (a physical change), observe a baking soda and vinegar reaction (a chemical change), then create an annotated scientific recipe card"},
+  {id:3,n:"DPEA Engineering",sc:["Dos Pueblos HS"],s:"build",ic:"ti-robot",bg:"#FAECE7",fg:"#4A1B0C",tg:"Build robots, compete nationally, and work with real engineers",wh:"The Dos Pueblos Engineering Academy (DPEA) is one of the most famous high school engineering programs in America. Students build robots that compete in national championships, design real mechanical systems, and work alongside university engineering mentors.",jo:["Mechanical Engineer","Robotics Engineer","Aerospace Engineer","Software Engineer","Systems Engineer","Product Designer","Engineering Manager"],sc2:["Physics: forces, motion, and energy","Mechanical systems and gears","Electronics and circuits","Computer programming and automation","CAD modeling and 3D printing"],cw:["Build FIRST Robotics competition robots","Design mechanical systems from scratch","Work with university engineering mentors","Compete in national championship tournaments"],sp:"Launch It: Egg Drop Engineering",spg:"4th grade",spd:"Design a protective pod for a raw egg using limited materials, drop-test it from 10 feet, analyze results, and create a professional engineering pitch poster"},
+  {id:4,n:"DP Media Pathway",sc:["Dos Pueblos HS"],s:"arts",ic:"ti-device-tv",bg:"#EEEDFE",fg:"#26215C",tg:"Create films, graphics, and digital media for real audiences",wh:"DP Media students learn to tell stories using cameras, editing software, and design tools — the same tools used by YouTube creators, Netflix producers, and game designers. Students produce actual films, graphics, and publications that are shared with the school community.",jo:["Film Director","Video Editor","Graphic Designer","Social Media Manager","Photographer","Game Designer","Motion Graphics Artist","Documentary Filmmaker"],sc2:["Color theory and light physics","Sound engineering and wave physics","Computer science principles","Visual storytelling and narrative","Digital file formats and compression"],cw:["Produce school films and video content","Create digital graphics and publications","Work with industry-standard production software","Build a professional digital portfolio"],sp:"Stop-Motion Science",spg:"4th grade",spd:"Build a physical set from craft materials, shoot a stop-motion animation explaining a science concept (like the water cycle), and record a voiceover narration"},
+  {id:5,n:"Product Innovation & Design",sc:["Dos Pueblos HS"],s:"build",ic:"ti-bulb",bg:"#EAF3DE",fg:"#173404",tg:"Invent new products, build prototypes, and pitch your ideas to the world",wh:"In Product Innovation & Design (called Innovate at DPHS), students act like real product designers at a startup company. They identify a problem someone has, brainstorm solutions, build a prototype, test it, and pitch it — like Shark Tank, but with real engineering behind every idea.",jo:["Product Designer","Industrial Engineer","UX Designer","Manufacturing Engineer","Materials Scientist","Entrepreneur","Patent Lawyer","Sustainability Consultant"],sc2:["Materials science and properties testing","Full engineering design process","Manufacturing methods and processes","Sustainability and lifecycle analysis","Ergonomics and human factors design"],cw:["Design products through a complete engineering cycle","Build working prototypes using real fabrication tools","Get feedback and mentoring from industry professionals","Pitch inventions to community panels"],sp:"Trash to Treasure: Redesigning Waste",spg:"4th grade",spd:"Engineer a useful product from discarded materials, test its structural properties, and design branded packaging with a hand-drawn logo and a sustainability promise"},
+  {id:6,n:"Sports Medicine",sc:["Dos Pueblos","Santa Barbara HS"],s:"health",ic:"ti-activity",bg:"#FBEAF0",fg:"#4B1528",tg:"Keep athletes healthy using anatomy, science, and hands-on skill",wh:"Sports Medicine students learn the human body at a level most adults never reach — every bone, muscle, tendon, and ligament. They practice real athletic training techniques and work alongside the school's sports teams. Some students earn first aid and athletic training certifications before they even graduate.",jo:["Athletic Trainer","Physical Therapist","Sports Medicine Doctor","Orthopedic Surgeon","Exercise Physiologist","EMT","Registered Nurse","Sports Nutritionist"],sc2:["Musculoskeletal anatomy — bones, muscles, tendons, ligaments","Biomechanics and kinesiology","First aid and injury response protocols","Human physiology and body systems","Nutrition and sports performance science"],cw:["Practice real injury assessment and treatment","Work hands-on with school athletic teams","Apply the RICE method (Rest, Ice, Compression, Elevation)","Study anatomy using professional models and diagrams"],sp:"Your Body's Emergency Response Team",spg:"5th grade",spd:"Learn how joints work, practice wrapping a simulated sprained ankle, then create a detailed medical illustration with anatomical labels and a treatment plan flowchart"},
+  {id:7,n:"SM Media Arts",sc:["San Marcos HS"],s:"arts",ic:"ti-camera",bg:"#EEEDFE",fg:"#26215C",tg:"Tell real stories through video, photography, and digital design",wh:"San Marcos Media Arts students run three real production teams inside the school — they are not just practicing, they are producing actual content for real audiences. Students use professional software to create digital art, video, and print design.",jo:["Video Producer","Digital Artist","Photographer","Advertising Designer","Broadcast Journalist","Social Media Strategist","UX/UI Designer","Art Director"],sc2:["Light physics and photography techniques","Color science and visual perception","Digital file formats and compression","Sound recording and wave physics","Visual communication principles"],cw:["Work on one of three real production teams inside the school","Earn Adobe and other industry certifications","Take dual enrollment courses at SBCC","Build a professional creative portfolio"],sp:"Nature's Newsroom",spg:"5th grade",spd:"Observe a local ecosystem, collect data on organisms and human impact, then produce a science news broadcast — either a filmed video or a fully illustrated storyboard with a hand-drawn data graphic"},
+  {id:8,n:"Teacher Education",sc:["San Marcos HS"],s:"edu",ic:"ti-school",bg:"#E1F5EE",fg:"#04342C",tg:"Learn what great teaching looks like — and actually practice it",wh:"Teacher Education students explore one of the most complex and important jobs there is: helping other people learn. They study how children develop, why some students struggle and others don't, and what separates great teachers from average ones — then they plan and deliver real mini-lessons.",jo:["Elementary School Teacher","High School Teacher","School Counselor","Curriculum Designer","Educational Researcher","School Principal","Special Education Teacher","Instructional Coach"],sc2:["Developmental psychology and learning stages","Learning theory and neuroscience","Child and adolescent psychology","Instructional design and curriculum planning","Educational technology"],cw:["Plan and deliver real mini-lessons to classmates","Analyze why different students learn differently","Study the history and philosophy of American education","Explore special education, inclusion, and diverse learners"],sp:"Teach It Forward: Design a Science Game",spg:"5th grade",spd:"Design a science review board game for 3rd graders — content-accurate question cards, a fully illustrated themed board, and a real playtest session with another class"},
+  {id:9,n:"Child Development",sc:["San Marcos HS"],s:"edu",ic:"ti-heart",bg:"#E1F5EE",fg:"#04342C",tg:"Discover the science of how babies and young children grow",wh:"Child Development students learn the science of how young children grow — physically, emotionally, and mentally — from birth to age 5. They visit real early childhood programs, learn to design age-appropriate activities, and understand what very young children need to thrive.",jo:["Early Childhood Educator","Child Psychologist","Pediatrician","Pediatric Nurse","Family Social Worker","Child Development Researcher","Child Life Specialist"],sc2:["Developmental psychology — stages from birth to age 5","Child brain development and neuroplasticity","Nutrition and physical health for young children","Fine and gross motor skill development timelines","Language acquisition and early literacy"],cw:["Visit real early childhood programs and schools","Design developmentally appropriate learning activities","Study detailed milestone charts by age group","Observe and analyze real child behavior in settings"],sp:"Baby's First STEM Toy",spg:"5th grade",spd:"Learn developmental milestones, engineer a safe sensory toy for a specific infant age group, pass real safety tests, and create branded packaging showing developmental benefits"},
+  {id:10,n:"Health Careers Academy (HCA)",sc:["San Marcos HS"],s:"health",ic:"ti-stethoscope",bg:"#FBEAF0",fg:"#4B1528",tg:"Explore 200+ healthcare careers — from science labs to saving lives",wh:"The Cottage Health Careers Academy is an intensive four-year program that explores everything from biomedical science to mental health to patient care. Students intern at real hospitals, earn industry certifications, and graduate ready to enter college health science programs.",jo:["Registered Nurse","Physician","Medical Assistant","Mental Health Counselor","Biomedical Scientist","Pharmacist","Physical Therapist","Hospital Administrator","Medical Researcher"],sc2:["Biomedical sciences via Project Lead The Way curriculum","Mental and behavioral health theory and practice","Human anatomy and physiology","Medical terminology and documentation","Epidemiology and public health data"],cw:["Complete internships at Cottage Health hospital","Earn CNA, PCT, and other industry certifications","Explore 200+ healthcare career pathways","Participate in leadership and academic mentoring programs"],sp:"Community Health Data Viz",spg:"5th grade",spd:"Survey classmates on a health behavior, calculate averages and compare to national data, then design a professional public health infographic poster with a call to action"},
+  {id:11,n:"Entrepreneurship Academy",sc:["San Marcos HS"],s:"edu",ic:"ti-briefcase",bg:"#FAEEDA",fg:"#633806",tg:"Start businesses, study markets, and turn big ideas into reality",wh:"The San Marcos Entrepreneurship Academy is for students who want to build something from nothing. Over three years, students learn business, marketing, economics, and finance — then actually use that knowledge to run real student business ventures.",jo:["Entrepreneur","Marketing Manager","Financial Analyst","Business Consultant","Investment Banker","Product Manager","Brand Strategist","Start-up Founder"],sc2:["Economics and market systems","Data analysis and business statistics","Environmental sustainability in business models","Psychology of consumer behavior","Supply chain and operations management"],cw:["Launch and run real student business ventures","Build partnerships with local Santa Barbara businesses","Study marketing, finance, economics, and leadership","Create a real business plan from scratch"],sp:"Green Startup: Sustainable School Store",spg:"5th grade",spd:"Design a sustainable school store, research product lifecycles, calculate profit margins, and create a complete brand identity with logo, color palette, and a pitch poster"},
+  {id:12,n:"CS Pathway",sc:["San Marcos HS"],s:"tech",ic:"ti-code",bg:"#E6F1FB",fg:"#042C53",tg:"Solve problems with code and learn to think like a computer",wh:"San Marcos' Computer Science Pathway teaches students to think like programmers — breaking big problems into small steps, writing code that actually runs, and understanding how computing shapes our world. Students build real programs and discover that coding is really just very precise problem-solving.",jo:["Software Engineer","App Developer","Data Scientist","Cybersecurity Analyst","AI/ML Engineer","Game Developer","Database Administrator","Tech Entrepreneur"],sc2:["Algorithms and computational thinking","Programming languages (Python, Java, etc.)","Data structures and organization","Computer networks and the internet","Technology's impact on society"],cw:["Learn the full iterative software development process","Build real programs and working applications","Earn industry programming certifications","Use code to solve real problems in the community"],sp:"Algorithm Art",spg:"6th grade",spd:"Write step-by-step instructions precise enough for a partner to follow exactly like a computer, debug the errors, then create the final algorithmic geometric artwork"},
+  {id:13,n:"CS Academy (SBHS)",sc:["Santa Barbara HS"],s:"tech",ic:"ti-device-laptop",bg:"#E6F1FB",fg:"#042C53",tg:"Build real software and learn from working tech professionals",wh:"Santa Barbara High's Computer Science Academy is a California Partnership Academy with official industry partnerships. Students build real software projects, learn from working developers in the community, and work in cohorts over multiple years — graduating ready for top college computer science programs.",jo:["Software Engineer","Product Manager","UX Designer","Data Analyst","Systems Architect","Cybersecurity Expert","AI Researcher","Tech Start-up Founder"],sc2:["Computer science theory and algorithms","Software development lifecycle management","Data science and applied statistics","Human-computer interaction and usability","Cryptography and cybersecurity fundamentals"],cw:["Build real applications with guidance from industry mentors","Work in multi-year student cohorts on long-term projects","Enter and compete in regional and national CS competitions","Earn college credit through SBCC dual enrollment"],sp:"App for Good: Design Thinking Challenge",spg:"6th grade",spd:"Interview a classmate to find a real problem they face, use design thinking to create a mobile app concept, and produce a visual pitch deck with wireframes and a user journey map"},
+  {id:14,n:"MAD Academy",sc:["Santa Barbara HS"],s:"arts",ic:"ti-palette",bg:"#EEEDFE",fg:"#26215C",tg:"Combine design, technology, and art to create work that matters",wh:"The Multimedia Arts & Design Academy (MAD) at Santa Barbara High is where students become professional-level designers and media producers. They work on real client projects, build impressive portfolios, and learn from industry professionals in graphic design, film, and digital media.",jo:["Graphic Designer","Art Director","Film Producer","Multimedia Artist","UI/UX Designer","Brand Designer","Illustrator","Creative Director","Motion Graphics Artist"],sc2:["Color theory and light physics","Visual hierarchy and cognitive perception","Digital imaging and file management","Typography and readability science","Design thinking methodology"],cw:["Work on real client design projects — not just practice","Build a professional-quality creative portfolio","Take design and media courses at SBCC for college credit","Exhibit finished work in public community art shows"],sp:"Science Infographic: Design Your Discovery",spg:"6th grade",spd:"Research a scientific discovery, then design a one-page infographic applying C.R.A.P. design principles — Contrast, Repetition, Alignment, Proximity"},
+  {id:15,n:"Translation & Interpretation",sc:["Santa Barbara HS"],s:"edu",ic:"ti-language",bg:"#E6F1FB",fg:"#042C53",tg:"Bridge languages and cultures in science, healthcare, law, and beyond",wh:"Translation & Interpretation prepares students to work as bilingual professionals who can make complex ideas clear across cultures. In Santa Barbara — a deeply bilingual community — this skill is incredibly powerful. Professional interpreters work in hospitals, courtrooms, international businesses, and science labs.",jo:["Medical Interpreter","Court Interpreter","Diplomatic Translator","Science Communicator","International Business Liaison","Bilingual Teacher","UN Interpreter","Language Technology Developer"],sc2:["Linguistics and the science of language structure","Cognitive science of bilingualism and the bilingual brain","Cross-cultural communication strategies","Technical and scientific vocabulary translation","Language technology, AI translation tools"],cw:["Practice simultaneous and consecutive interpretation techniques","Learn precise technical vocabulary across multiple fields","Study the ethics and standards of professional interpretation","Develop deep cross-cultural competency and awareness"],sp:"Science Speaks Two Languages",spg:"6th grade",spd:"Translate a science concept into Spanish using context (not just a dictionary), then create a bilingual illustrated explainer with a comic strip set in a Santa Barbara cultural context"},
+  {id:16,n:"VADA",sc:["Santa Barbara HS"],s:"arts",ic:"ti-brush",bg:"#EEEDFE",fg:"#26215C",tg:"Create fine art, fashion, and design that shows the world something new",wh:"The Visual Arts & Design Academy (VADA) at Santa Barbara High is where serious young artists develop their artistic voice. Students work in fine arts, graphic design, fashion, and visual communication — building portfolios strong enough to win college scholarships and exhibit in real public galleries.",jo:["Fine Artist","Fashion Designer","Gallery Curator","Art Teacher","Graphic Designer","Illustrator","Art Therapist","Museum Director","Creative Director"],sc2:["Color theory and light physics","Textile science and materials","Visual perception and cognitive science","Design thinking methodology","Art history and cultural context"],cw:["Create artwork for real public community exhibitions","Build a serious, professional fine art portfolio","Earn college credit at SBCC through dual enrollment","Develop a unique personal artistic identity and voice"],sp:"Wearable Science: Form Meets Function",spg:"6th grade",spd:"Design and build a wearable item (bracelet, bag, or pin) that incorporates a real science principle — UV sensing, structural forces, or light and color mixing — and document the design process in an illustrated journal"}
+];
+
+const FM={all:()=>true,arts:p=>p.s==='arts',tech:p=>p.s==='tech',health:p=>p.s==='health',build:p=>p.s==='build',edu:p=>!['arts','tech','health','build'].includes(p.s)};
+let oId=null, cF='all';
+
+function sf(f){
+  cF=f; oId=null;
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
+  rg();
+}
+
+function rg(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const vis=D.filter(p=>{
+    if(!FM[cF](p)) return false;
+    if(!q) return true;
+    return [p.n,...p.jo,...p.sc2,p.tg,p.wh].join(' ').toLowerCase().includes(q);
+  });
+  const g=document.getElementById('grid');
+  if(!vis.length){g.innerHTML='<div class="no-results"><i class="ti ti-search" style="font-size:32px;display:block;margin:0 auto 12px"></i>No academies match your search.<br>Try different keywords.</div>';return;}
+  g.innerHTML=vis.map(p=>{
+    const o=oId===p.id;
+    return`<div class="pc${o?' open':''}" data-id="${p.id}">
+<div class="ph">
+<div class="pi" style="background:${p.bg};color:${p.fg}"><i class="ti ${p.ic}" aria-hidden="true"></i></div>
+<div style="flex:1;min-width:0">
+<div class="pn">${p.n}</div>
+<div class="ps">${p.sc.join(' · ')}</div>
+</div>
+<i class="ti ti-chevron-down chv${o?' r':''}" aria-hidden="true"></i>
+</div>
+${o?`<div class="pb">
+<p class="wh">${p.wh}</p>
+<div class="sl">Jobs this leads to</div>
+<div class="pills">${p.jo.map(j=>`<span class="pl jp">${j}</span>`).join('')}</div>
+<div class="sl">Science and skills you'll use</div>
+<div class="pills">${p.sc2.map(s=>`<span class="pl spl">${s}</span>`).join('')}</div>
+<div class="sl">What CTE students actually do</div>
+${p.cw.map(w=>`<div class="cw-row"><i class="ti ti-arrow-right" aria-hidden="true"></i><span>${w}</span></div>`).join('')}
+<div class="steam-box">
+<div class="steam-lbl">Your connected STEAM project &nbsp;·&nbsp; ${p.spg}</div>
+<div class="steam-title">${p.sp}</div>
+<div class="steam-desc">${p.spd}</div>
+</div>
+</div>`:`<div class="tg">${p.tg}</div>`}
+</div>`;
+  }).join('');
+}
+
+document.getElementById('grid').addEventListener('click',e=>{
+  const c=e.target.closest('[data-id]');
+  if(c){oId=oId===+c.dataset.id?null:+c.dataset.id;rg();}
+});
+
+rg();
+</script>
+</body>
+</html>
